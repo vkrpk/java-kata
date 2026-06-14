@@ -27,12 +27,23 @@ public class DataInitializer {
                     UUID.fromString("00000000-0000-0000-0000-000000000002"),
                     MembershipLevel.STANDARD, "bob@test.com", 0));
 
+            customerRepository.save(new Customer(
+                    UUID.fromString("00000000-0000-0000-0000-000000000003"),
+                    MembershipLevel.STANDARD, "carol@test.com", 0));
+
             flashSaleRepository.save(new FlashSale(
                     UUID.fromString("00000000-0000-0000-0000-000000000010"),
                     "iPhone 15", 10,
                     Instant.now().minusSeconds(60),
                     Instant.now().plusSeconds(3600),
                     10));
+
+            flashSaleRepository.save(new FlashSale(
+                    UUID.fromString("00000000-0000-0000-0000-000000000011"),
+                    "Samsung Galaxy S25", 5,
+                    Instant.now().plusSeconds(180),
+                    Instant.now().plusSeconds(3600),
+                    5));
         };
     }
 }
