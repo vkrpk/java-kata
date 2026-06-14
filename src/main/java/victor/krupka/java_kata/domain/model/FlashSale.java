@@ -17,7 +17,7 @@ public class FlashSale {
         this.initialStock = initialStock;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.remainingStock = remainingStock;
+        this.remainingStock = initialStock;
     }
 
     public UUID getId() {
