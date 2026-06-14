@@ -46,31 +46,25 @@ The UI will be available on:
 http://localhost:5173
 ```
 
-## Demo data
+## Business rules
 
-The application starts with preloaded demo data.
+- Flash sales are only accessible during their active period.
+- Flash sales have limited stock.
+- Premium customers (SILVER, GOLD) benefit from early access 5 minutes before the sale starts.
+- Standard customers gain premium access after 5 purchases.
+- Priority score is calculated as: `membershipLevel.baseScore + (purchaseCount * 10)`
+    - STANDARD: 0 base score
+    - SILVER: 10 base score
+    - GOLD: 25 base score
 
-To test the purchase flow, use the following flash sale identifier:
+## Demo
 
-Customers:
-- Alice (GOLD): 00000000-0000-0000-0000-000000000001
-- Bob (STANDARD): 00000000-0000-0000-0000-000000000002
+Select a customer from the dropdown to see available flash sales.
+Two flash sales are preloaded:
+- **iPhone 15** — active now, visible to all customers
+- **Samsung Galaxy S25** — starts in 3 minutes, visible to premium customers only
 
-Flash sale:
-- iPhone 15: 00000000-0000-0000-0000-000000000010
-
-This flash sale corresponds to the latest iPhone available in a flash sale.
-
-## Assumptions
-
-As this exercise is time-boxed, repositories are implemented in memory to focus on business rules and Clean Architecture concepts.
-
-The main business rules implemented are:
-
-* Flash sales are only accessible during their active period.
-* Flash sales have limited stock.
-* Premium customers benefit from priority access.
-* Priority is determined by membership level and purchase history.
+To demonstrate premium access: select Carol (STANDARD) and purchase iPhone 15 five times — she will then gain access to the Samsung flash sale.
 
 ## Testing
 
