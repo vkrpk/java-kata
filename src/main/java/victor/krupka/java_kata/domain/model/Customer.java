@@ -32,10 +32,10 @@ public class Customer {
     }
 
     public boolean isPremium() {
-        return membershipLevel.isPremium();
+        return membershipLevel.isPremium() || purchaseCount >= 5;
     }
 
     public int getPriorityScore() {
-        return membershipLevel.getBaseScore() + (purchaseCount * 2);
+        return membershipLevel.getBaseScore() + (purchaseCount * 10);
     }
 }
