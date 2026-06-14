@@ -69,4 +69,12 @@ public class FlashSale {
 
         remainingStock--;
     }
+
+    public boolean isPubliclyActive(Instant now) {
+        return now.isAfter(startTime) && now.isBefore(endTime);
+    }
+
+    public boolean isPremiumActive(Instant now) {
+        return now.isAfter(startTime.minusSeconds(5 * 60)) && now.isBefore(endTime);
+    }
 }
