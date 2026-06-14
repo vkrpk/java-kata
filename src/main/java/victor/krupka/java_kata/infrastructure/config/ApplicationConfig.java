@@ -22,11 +22,6 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public InMemoryPurchaseRepository purchaseRepository() {
-        return new InMemoryPurchaseRepository();
-    }
-
-    @Bean
     public PurchaseFlashSaleUseCase purchaseFlashSaleUseCase(
             InMemoryFlashSaleRepository flashSaleRepository,
             InMemoryCustomerRepository customerRepository,
@@ -39,5 +34,10 @@ public class ApplicationConfig {
             InMemoryFlashSaleRepository flashSaleRepository,
             InMemoryCustomerRepository customerRepository) {
         return new GetActiveFlashSalesUseCase(flashSaleRepository, customerRepository);
+    }
+
+    @Bean
+    public InMemoryPurchaseRepository purchaseRepository(InMemoryCustomerRepository customerRepository) {
+        return new InMemoryPurchaseRepository(customerRepository);
     }
 }
