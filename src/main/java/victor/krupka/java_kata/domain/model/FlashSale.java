@@ -1,5 +1,8 @@
 package victor.krupka.java_kata.domain.model;
 
+import victor.krupka.java_kata.domain.exception.FlashSaleNotActiveException;
+import victor.krupka.java_kata.domain.exception.InsufficientStockException;
+
 import java.time.Instant;
 import java.util.UUID;
 
@@ -17,7 +20,7 @@ public class FlashSale {
         this.initialStock = initialStock;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.remainingStock = initialStock;
+        this.remainingStock = remainingStock;
     }
 
     public UUID getId() {
@@ -46,22 +49,22 @@ public class FlashSale {
 
     public void purchase(Customer customer, Instant now) {
         if (now.isAfter(endTime)) {
-            throw new RuntimeException("Flash sale is over");
+            throw new FlashSaleNotActiveException("Flash sale is over");
         }
 
         if (customer.isPremium()) {
             Instant premiumStart = startTime.minusSeconds(5 * 60);
             if (now.isBefore(premiumStart)) {
-                throw new RuntimeException("Flash sale not yet open, even for premium");
+                throw new FlashSaleNotActiveException("Flash sale not yet open, even for premium");
             }
         } else {
             if (now.isBefore(startTime)) {
-                throw new RuntimeException("Flash sale not yet open");
+                throw new FlashSaleNotActiveException("Flash sale not yet open");
             }
         }
 
         if (remainingStock <= 0) {
-            throw new RuntimeException("No stock remaining");
+            throw new InsufficientStockException("No stock remaining");
         }
 
         remainingStock--;
